@@ -4,6 +4,7 @@ import com.project.proiectspring.dto.CreateGenreDto;
 import com.project.proiectspring.mapper.GenreMapper;
 import com.project.proiectspring.model.Genre;
 import com.project.proiectspring.service.GenreService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,7 @@ public class GenreController {
         this.genreMapper = genreMapper;
     }
 
+    @Operation(summary = "Get all genres", description = "Retrieve all genres from the database")
     @GetMapping
     public List<Genre> get(
             @RequestParam(required = false)
@@ -30,6 +32,7 @@ public class GenreController {
         return genreService.get(description);
     }
 
+    @Operation(summary = "Add a new genre", description = "Create a new genre with the provided information")
     @PostMapping
     public ResponseEntity<Genre> create(
             @RequestBody

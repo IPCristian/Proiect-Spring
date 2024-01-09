@@ -2,6 +2,9 @@ package com.project.proiectspring.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
 
 public class CreateRentalDto {
 
@@ -11,21 +14,22 @@ public class CreateRentalDto {
     @NotNull
     private long user_id;
 
-    @NotBlank
-    private String rentalDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date rentalDate;
 
-    @NotBlank
-    private String dueDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dueDate;
 
     public CreateRentalDto() {
     }
 
-    public CreateRentalDto(long book_id, long user_id, String rentalDate, String dueDate) {
+    public CreateRentalDto(long book_id, long user_id, Date rentalDate, Date dueDate) {
         this.book_id = book_id;
         this.user_id = user_id;
         this.rentalDate = rentalDate;
         this.dueDate = dueDate;
     }
+    ;
 
     public long getBook_id() {
         return book_id;
@@ -43,19 +47,19 @@ public class CreateRentalDto {
         this.user_id = user_id;
     }
 
-    public String getRentalDate() {
+    public Date getRentalDate() {
         return rentalDate;
     }
 
-    public void setRentalDate(String rentalDate) {
+    public void setRentalDate(Date rentalDate) {
         this.rentalDate = rentalDate;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(String dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 }

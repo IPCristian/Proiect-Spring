@@ -23,11 +23,17 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public Book update(Book book) {
+    public Book update(Book book, Book newBook) {
         Optional<Book> existingBook = bookRepository.findById(book.getId());
         if(existingBook.isEmpty()) {
             throw new BookNotFoundException();
         }
+
+        book.setAuthor(newBook.getAuthor());
+        book.setGenre(newBook.getGenre());
+        book.setPublisher(newBook.getPublisher());
+        book.setTitle(newBook.getTitle());
+
         return bookRepository.save(book);
     }
 
@@ -41,5 +47,18 @@ public class BookService {
                 books = bookRepository.findAll();
         }
         return books;
+    }
+
+    public Book get(Long id) {
+
+        if(id != null) {
+            Optional<Book> book = bookRepository.findById(id);
+
+            if (book.isPresent()) {
+                return book.get();
+            }
+        }
+
+        return null;
     }
 }
